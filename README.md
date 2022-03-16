@@ -1,5 +1,5 @@
-## StarDbgi
+## StarDB
 
-[![StarDb](../../actions/workflows/master.yml/badge.svg)](../../actions/workflows/master.yml)
+[![StarDB CI](../../actions/workflows/master.yml/badge.svg)](../../actions/workflows/master.yml)
 
 ## Demo

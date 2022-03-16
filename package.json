@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ligalaiz/react.git"
+    "url": "git+https://github.com/Ligalaiz/stardb.git"
   },
   "keywords": [
     "react",
@@ -35,9 +35,9 @@
   "author": "Ligalaiz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Ligalaiz/react/issues"
+    "url": "https://github.com/Ligalaiz/stardb/issues"
   },
-  "homepage": "https://github.com/Ligalaiz/react#readme",
+  "homepage": "https://github.com/Ligalaiz/stardb#readme",
   "devDependencies": {
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.14.8",
