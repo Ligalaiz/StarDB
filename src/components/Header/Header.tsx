@@ -6,9 +6,10 @@ const Header: FC = () => {
   const { search } = useLocation();
 
   return (
-    <header className="header" data-testid="header">
+    <header className="header" data-testid="header" css={h.header}>
       <div className="logo">
         <NavLink
+          css={h.logo}
           className="logo"
           to={{
             pathname: '/',
@@ -19,9 +20,10 @@ const Header: FC = () => {
         </NavLink>
       </div>
       <nav>
-        <ul className="nav">
+        <ul className="nav reset-list" css={h.nav}>
           <li>
             <NavLink
+              css={h.navLink}
               className="nav__link"
               to={{
                 pathname: '/people',
@@ -33,6 +35,7 @@ const Header: FC = () => {
           </li>
           <li>
             <NavLink
+              css={h.navLink}
               className="nav__link"
               to={{
                 pathname: '/planets',
@@ -44,6 +47,7 @@ const Header: FC = () => {
           </li>
           <li>
             <NavLink
+              css={h.navLink}
               className="nav__link"
               to={{
                 pathname: '/starships',
@@ -55,6 +59,7 @@ const Header: FC = () => {
           </li>
           <li>
             <NavLink
+              css={h.navLink}
               className="nav__link"
               to={{
                 pathname: '/login',
@@ -66,6 +71,7 @@ const Header: FC = () => {
           </li>
           <li>
             <NavLink
+              css={h.navLink}
               className="nav__link"
               to={{
                 pathname: '/secret',
@@ -77,7 +83,9 @@ const Header: FC = () => {
           </li>
         </ul>
       </nav>
-      <button data-testid="changeService">Change Service</button>
+      <button data-testid="changeService" css={h.btn}>
+        Change Service
+      </button>
     </header>
   );
 };
