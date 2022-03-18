@@ -11,7 +11,7 @@ const dataMock: { name: string; title: string }[] = [
 
 const List: FC = () => {
   return (
-    <ul className="reset-list" css={l.list}>
+    <ul className="reset-list" data-testid="list" css={l.list}>
       {dataMock.map(({ name, title }) => (
         <li key={name} css={l.item}>
           <a href="#d" css={l.link}>
