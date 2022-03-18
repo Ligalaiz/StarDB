@@ -3,9 +3,10 @@ import { color } from '@src/styles';
 
 export const header = css`
   display: flex;
-  gap: 0.2rem;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
+
+  gap: 0.2rem;
 `;
 
 export const nav = css`
