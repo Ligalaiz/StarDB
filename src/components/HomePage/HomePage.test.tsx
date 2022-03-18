@@ -6,12 +6,12 @@ import { HomePage } from '@components/HomePage';
 const renderComponent = () => render(<HomePage />);
 
 describe('HomePage component', () => {
-  describe('Component not exist', () => {
-    it('homePage check that the component has not been rendered #smoke', () => {
+  describe('Component exist', () => {
+    it('homePage check that the component has been rendered #smoke', () => {
       const { queryByTestId } = renderComponent();
       const homePage = queryByTestId('homePage');
 
-      expect(homePage).not.toBeInTheDocument();
+      expect(homePage).toBeInTheDocument();
     });
   });
 });
