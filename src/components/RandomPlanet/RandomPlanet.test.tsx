@@ -6,12 +6,14 @@ import { RandomPlanet } from '@components/RandomPlanet';
 const renderComponent = () => render(<RandomPlanet />);
 
 describe('RandomPlanet component', () => {
-  describe('Component not exist', () => {
-    it('randomPlanet check that the component has not been rendered #smoke', () => {
+  describe('Component exist', () => {
+    it('randomPlanet check that the component has been rendered #smoke', () => {
       const { queryByTestId } = renderComponent();
       const randomPlanet = queryByTestId('randomPlanet');
+      const randomImage = queryByTestId('randomImage');
 
-      expect(randomPlanet).not.toBeInTheDocument();
+      expect(randomPlanet).toBeInTheDocument();
+      expect(randomImage).toBeInTheDocument();
     });
   });
 });
