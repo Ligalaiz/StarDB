@@ -6,12 +6,12 @@ import { List } from '@components/List';
 const renderComponent = () => render(<List />);
 
 describe('List component', () => {
-  describe('Component not exist', () => {
-    it('list check that the component has not been rendered #smoke', () => {
+  describe('Component exist', () => {
+    it('list check that the component has been rendered #smoke', () => {
       const { queryByTestId } = renderComponent();
       const list = queryByTestId('list');
 
-      expect(list).not.toBeInTheDocument();
+      expect(list).toBeInTheDocument();
     });
   });
 });
