@@ -12,12 +12,15 @@ export const image = css`
   border-radius: 10px;
 `;
 
-export const randomPlanet = css`
+export const card = css`
   display: flex;
   margin-bottom: 1rem;
   padding: 1rem;
-  border: 1px solid ${color['grey-color-light']};
+  border: 1px solid ${color['grey-color-light-X1']};
   border-radius: 0.25rem;
+  min-height: 172px;
+
+  background-color: ${color['grey-color-light']};
 `;
 
 export const title = css`
@@ -37,6 +40,22 @@ export const item = css`
 
 export const rotation = css`
   ${item}
-  border-top: 1px solid ${color['grey-color-light']};
-  border-bottom: 1px solid ${color['grey-color-light']};
+  border-top: 1px solid ${color['grey-color-light-X1']};
+  border-bottom: 1px solid ${color['grey-color-light-X1']};
+`;
+
+export const button = css`
+  border: none;
+  padding: 7px 14px;
+  border-radius: 4px;
+
+  color: white;
+  font-size: 18px;
+
+  background-color: ${color['red-color']};
+
+  transition: all 0.2s linear;
+  &:hover {
+    background-color: ${color['red-color-light']};
+  }
 `;
