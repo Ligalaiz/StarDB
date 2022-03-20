@@ -6,12 +6,12 @@ import { SecretPage } from '@components/SecretPage';
 const renderComponent = () => render(<SecretPage />);
 
 describe('SecretPage component', () => {
-  describe('Component not exist', () => {
-    it('secretPage check that the component has not been rendered #smoke', () => {
+  describe('Component exist', () => {
+    it('secretPage check that the component has been rendered #smoke', () => {
       const { queryByTestId } = renderComponent();
       const secretPage = queryByTestId('secretPage');
 
-      expect(secretPage).not.toBeInTheDocument();
+      expect(secretPage).toBeInTheDocument();
     });
   });
 });
