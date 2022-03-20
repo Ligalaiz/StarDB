@@ -6,12 +6,12 @@ import { StarshipsPage } from '@components/StarshipsPage';
 const renderComponent = () => render(<StarshipsPage />);
 
 describe('StarshipsPage component', () => {
-  describe('Component not exist', () => {
-    it('starshipsPage check that the component has not been rendered #smoke', () => {
+  describe('Component exist', () => {
+    it('starshipsPage check that the component has been rendered #smoke', () => {
       const { queryByTestId } = renderComponent();
-      const starshipsPage = queryByTestId('planetsPage');
+      const starshipsPage = queryByTestId('starshipsPage');
 
-      expect(starshipsPage).not.toBeInTheDocument();
+      expect(starshipsPage).toBeInTheDocument();
     });
   });
 });
