@@ -6,12 +6,12 @@ import { LoginPage } from '@components/LoginPage';
 const renderComponent = () => render(<LoginPage />);
 
 describe('LoginPage component', () => {
-  describe('Component not exist', () => {
-    it('loginPage check that the component has not been rendered #smoke', () => {
+  describe('Component exist', () => {
+    it('loginPage check that the component has been rendered #smoke', () => {
       const { queryByTestId } = renderComponent();
       const loginPage = queryByTestId('loginPage');
 
-      expect(loginPage).not.toBeInTheDocument();
+      expect(loginPage).toBeInTheDocument();
     });
   });
 });
