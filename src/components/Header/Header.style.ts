@@ -26,6 +26,9 @@ export const navLink = css`
   &:hover {
     background-color: ${color['grey-color-light']};
   }
+  &.active {
+    background-color: ${color['grey-color-light']};
+  }
 `;
 
 export const logo = css`

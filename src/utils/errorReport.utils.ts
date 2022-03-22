@@ -8,10 +8,10 @@ const reportErrorUtils = ({
   cb,
 }: {
   message: string;
-  cb?: ((m: string) => void) | undefined | null;
+  cb?: (({ error }: { error: string }) => void) | undefined | null;
 }) => {
   if (cb) {
-    cb(message);
+    cb({ error: message });
   }
   console.log(message);
 };

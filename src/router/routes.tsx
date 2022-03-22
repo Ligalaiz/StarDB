@@ -1,8 +1,8 @@
 import { Error } from '@components/Error';
 import { HomePage } from '@components/HomePage';
-import { PeoplePage } from '@components/PeoplePage';
-import { PlanetsPage } from '@components/PlanetsPage';
-import { StarshipsPage } from '@components/StarshipsPage';
+import { PeoplePage } from '@modules/PeoplePage';
+import { PlanetsPage } from '@modules/PlanetsPage';
+import { StarshipsPage } from '@modules/StarshipsPage';
 import { LoginPage } from '@components/LoginPage';
 import { SecretPage } from '@components/SecretPage';
 

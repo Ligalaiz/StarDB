@@ -1,9 +1,15 @@
 import React, { FC } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useAction } from '@src/hooks/useAction';
 import * as h from './Header.style';
 
 const Header: FC = () => {
   const { search } = useLocation();
+  const { setCurrentData } = useAction();
+
+  const handleClick = () => {
+    setCurrentData({ currentData: null });
+  };
 
   return (
     <header className="header" data-testid="header" css={h.header}>
@@ -29,6 +35,7 @@ const Header: FC = () => {
                 pathname: '/people',
                 search: `${search}`,
               }}
+              onClick={handleClick}
             >
               People
             </NavLink>
@@ -41,6 +48,7 @@ const Header: FC = () => {
                 pathname: '/planets',
                 search: `${search}`,
               }}
+              onClick={handleClick}
             >
               Planets
             </NavLink>
@@ -53,6 +61,7 @@ const Header: FC = () => {
                 pathname: '/starships',
                 search: `${search}`,
               }}
+              onClick={handleClick}
             >
               Starships
             </NavLink>
@@ -65,6 +74,7 @@ const Header: FC = () => {
                 pathname: '/login',
                 search: `${search}`,
               }}
+              onClick={handleClick}
             >
               Login
             </NavLink>
@@ -77,6 +87,7 @@ const Header: FC = () => {
                 pathname: '/secret',
                 search: `${search}`,
               }}
+              onClick={handleClick}
             >
               Secret
             </NavLink>
