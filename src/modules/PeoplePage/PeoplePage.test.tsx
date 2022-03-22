@@ -1,9 +1,16 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import { PeoplePage } from '@components/PeoplePage';
+import { PeoplePage } from '@src/modules/PeoplePage';
+import { Provider } from 'react-redux';
+import { store } from '@src/store';
 
-const renderComponent = () => render(<PeoplePage />);
+const renderComponent = () =>
+  render(
+    <Provider store={store}>
+      <PeoplePage />
+    </Provider>,
+  );
 
 describe('PeoplePage component', () => {
   describe('Component exist', () => {
