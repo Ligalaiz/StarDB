@@ -1,9 +1,16 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import { PlanetsPage } from '@components/PlanetsPage';
+import { PlanetsPage } from '@src/modules/PlanetsPage';
+import { Provider } from 'react-redux';
+import { store } from '@src/store';
 
-const renderComponent = () => render(<PlanetsPage />);
+const renderComponent = () =>
+  render(
+    <Provider store={store}>
+      <PlanetsPage />
+    </Provider>,
+  );
 
 describe('PlanetsPage component', () => {
   describe('Component exist', () => {
