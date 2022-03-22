@@ -1,11 +1,20 @@
 import React, { FC } from 'react';
+import { useAction } from '@src/hooks/useAction';
+import { IStardbData } from '@src/interfaces';
+import { Loader } from '@components/Loader';
+import { getImage } from '@utils/getUrl.utils';
+import { reportErrorUtils, getErrorMessageUtils } from '@src/utils';
 import * as c from './Card.style';
 
-const dataMock: {
-  [key: string]: string;
-} = { title: 'Title1', population: 'Population' };
+interface ICard {
+  isRandom?: boolean | undefined;
+  data: IStardbData | null;
+  isLoading: boolean;
+}
 
-const Card: FC<{ isRandom?: boolean | undefined }> = ({ isRandom }) => {
+const Card: FC<ICard> = ({ isRandom, data, isLoading }) => {
+  const { setRandomError, setDataError } = useAction();
+
   const throwError = () => {
     throw new Error('Required');
   };
@@ -13,45 +22,67 @@ const Card: FC<{ isRandom?: boolean | undefined }> = ({ isRandom }) => {
   const handleClick = () => {
     try {
       throwError();
-    } catch (e) {
-      console.log(e.message);
+    } catch (err) {
+      const cb = isRandom ? setRandomError : setDataError;
+      reportErrorUtils({
+        message: getErrorMessageUtils(err),
+        cb,
+      });
     }
   };
-  const btn = isRandom ? (
+
+  const btn = isRandom ? null : (
     <button onClick={handleClick} css={c.button}>
       Throw Error{' '}
     </button>
-  ) : null;
+  );
+
+  const message = isRandom ? (
+    <div>
+      <p>Loading...</p>
+    </div>
+  ) : (
+    <div>
+      <p>Select item from list</p>
+    </div>
+  );
+
+  let content = <>{message}</>;
+
+  if (data) {
+    const { type, id, ...currentData } = data;
+    content = (
+      <>
+        <div css={c.imageWrap}>
+          <img
+            src={getImage(type, id)}
+            alt="title"
+            data-testid="cardImage"
+            css={c.image}
+            onError={({ currentTarget }) => {
+              currentTarget.onerror = null;
+              currentTarget.src = 'https://via.placeholder.com/150';
+            }}
+          />
+        </div>
+        <div>
+          <p css={c.title}>{data.name}</p>
+          <ul className="reset-list" css={c.parametrs}>
+            {Object.keys(currentData).map((key) => (
+              <li css={c.item} key={key}>
+                {key} {data[key]}
+              </li>
+            ))}
+          </ul>
+          {btn}
+        </div>
+      </>
+    );
+  }
 
   return (
     <div data-testid="card" css={c.card}>
-      {!dataMock && isRandom ? (
-        <div>
-          <p>Select item from list</p>
-        </div>
-      ) : (
-        <>
-          <div css={c.imageWrap}>
-            <img
-              src="https://via.placeholder.com/150"
-              alt="title"
-              data-testid="cardImage"
-              css={c.image}
-            />
-          </div>
-          <div>
-            <p css={c.title}>{dataMock.title}</p>
-            <ul className="reset-list" css={c.parametrs}>
-              {Object.keys(dataMock).map((key) => (
-                <li css={c.item} key={key}>
-                  {key} {dataMock.key}
-                </li>
-              ))}
-            </ul>
-            {btn}
-          </div>
-        </>
-      )}
+      {isLoading ? <Loader isLoading={isLoading} /> : content}
     </div>
   );
 };
