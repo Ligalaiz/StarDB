@@ -21,7 +21,7 @@ const RandomPlanet: FC = () => {
     const random = String(randomiseUtils(2, 19));
     setRandomCurrentID({ randomCurrentID: random });
     stardbRequest(`planets/${random}`);
-  }, []);
+  }, [setRandomCurrentID, stardbRequest]);
 
   useEffect(() => {
     const timeoutID = setTimeout(() => {
@@ -33,7 +33,7 @@ const RandomPlanet: FC = () => {
     return () => {
       clearTimeout(timeoutID);
     };
-  }, [randomCurrentID]);
+  }, [randomCurrentID, setRandomCurrentID, stardbRequest]);
 
   return (
     <Card
