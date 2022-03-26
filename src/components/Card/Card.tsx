@@ -3,7 +3,7 @@ import { useAction } from '@src/hooks/useAction';
 import { IStardbData } from '@src/interfaces';
 import { Loader } from '@components/Loader';
 import { getImage } from '@utils/getUrl.utils';
-import { reportErrorUtils, getErrorMessageUtils } from '@src/utils';
+import notFound from '@assets/img/notFound.png';
 import * as c from './Card.style';
 
 interface ICard {
@@ -22,12 +22,10 @@ const Card: FC<ICard> = ({ isRandom, data, isLoading }) => {
   const handleClick = () => {
     try {
       throwError();
-    } catch (err) {
+    } catch (e) {
+      const error: string = (e as Error).message;
       const cb = isRandom ? setRandomError : setDataError;
-      reportErrorUtils({
-        message: getErrorMessageUtils(err),
-        cb,
-      });
+      cb({ error });
     }
   };
 
@@ -61,7 +59,7 @@ const Card: FC<ICard> = ({ isRandom, data, isLoading }) => {
             css={c.image}
             onError={({ currentTarget }) => {
               currentTarget.onerror = null;
-              currentTarget.src = 'https://via.placeholder.com/150';
+              currentTarget.src = notFound;
             }}
           />
         </div>
