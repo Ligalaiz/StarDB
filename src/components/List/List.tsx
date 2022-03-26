@@ -14,7 +14,7 @@ const List: FC<IList> = ({ data, isLoading }) => {
 
   const clickHandler = (id: number) => {
     if (data) {
-      setCurrentID({ currentID: String(id + 2) });
+      setCurrentID({ currentID: String(id + 1) });
       setCurrentData({ currentData: { ...data[id] } });
     }
   };
