@@ -1,5 +1,4 @@
-import React, { FC } from 'react';
-import { useAction } from '@src/hooks/useAction';
+import React, { FC, useState } from 'react';
 import { IStardbData } from '@src/interfaces';
 import { Loader } from '@components/Loader';
 import { getImage } from '@utils/getUrl.utils';
@@ -13,21 +12,14 @@ interface ICard {
 }
 
 const Card: FC<ICard> = ({ isRandom, data, isLoading }) => {
-  const { setRandomError, setDataError } = useAction();
-
-  const throwError = () => {
-    throw new Error('Required');
-  };
-
+  const [error, setError] = useState(false);
   const handleClick = () => {
-    try {
-      throwError();
-    } catch (e) {
-      const error: string = (e as Error).message;
-      const cb = isRandom ? setRandomError : setDataError;
-      cb({ error });
-    }
+    setError(!error);
   };
+
+  if (error) {
+    throw new Error('Required');
+  }
 
   const btn = isRandom ? null : (
     <button onClick={handleClick} css={c.button}>
