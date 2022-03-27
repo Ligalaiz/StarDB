@@ -1,9 +1,8 @@
-import React, { FC } from 'react';
-import { useAction } from '@src/hooks/useAction';
+import React, { FC, useState } from 'react';
 import { IStardbData } from '@src/interfaces';
 import { Loader } from '@components/Loader';
 import { getImage } from '@utils/getUrl.utils';
-import { reportErrorUtils, getErrorMessageUtils } from '@src/utils';
+import notFound from '@assets/img/notFound.png';
 import * as c from './Card.style';
 
 interface ICard {
@@ -13,23 +12,14 @@ interface ICard {
 }
 
 const Card: FC<ICard> = ({ isRandom, data, isLoading }) => {
-  const { setRandomError, setDataError } = useAction();
-
-  const throwError = () => {
-    throw new Error('Required');
-  };
-
+  const [error, setError] = useState(false);
   const handleClick = () => {
-    try {
-      throwError();
-    } catch (err) {
-      const cb = isRandom ? setRandomError : setDataError;
-      reportErrorUtils({
-        message: getErrorMessageUtils(err),
-        cb,
-      });
-    }
+    setError(!error);
   };
+
+  if (error) {
+    throw new Error('Required');
+  }
 
   const btn = isRandom ? null : (
     <button onClick={handleClick} css={c.button}>
@@ -61,7 +51,7 @@ const Card: FC<ICard> = ({ isRandom, data, isLoading }) => {
             css={c.image}
             onError={({ currentTarget }) => {
               currentTarget.onerror = null;
-              currentTarget.src = 'https://via.placeholder.com/150';
+              currentTarget.src = notFound;
             }}
           />
         </div>

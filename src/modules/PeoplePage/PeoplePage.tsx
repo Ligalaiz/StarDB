@@ -1,6 +1,11 @@
 import React, { FC } from 'react';
-import { ExportPeoplePage } from './ExportPeoplePage';
+import { Template } from '@src/hooks/useTemplate';
+import { errorBoundary } from '@src/HOC/errorBoundary';
 
-const PeoplePage: FC = (props: any) => <ExportPeoplePage {...props} />;
+const TemplateWithErrorBoundary = errorBoundary(Template);
+
+const PeoplePage: FC = () => {
+  return <TemplateWithErrorBoundary path="people" />;
+};
 
 export { PeoplePage };

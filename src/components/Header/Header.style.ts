@@ -3,7 +3,7 @@ import { color } from '@src/styles';
 
 export const header = css`
   display: flex;
-  margin-top: 0.5rem;
+  padding-top: 0.5rem;
   margin-bottom: 1rem;
 
   gap: 0.2rem;

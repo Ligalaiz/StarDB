@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { set } from './utils';
 
-export const App: FC<React.ReactNode> = ({ children }) => {
+const App: FC<ReactNode> = ({ children }) => {
   const location = useLocation();
   set('currentLocation', location);
 
   return <>{children}</>;
 };
+
+export { App };
