@@ -1,8 +1,11 @@
-import React, { FC, useEffect } from 'react';
 import { Card } from '@components/Card';
 import { useTypedUseSelector } from '@src/hooks/useTypedUseSelector';
+import { errorBoundary } from '@src/HOC/errorBoundary';
 import { useAction } from '@src/hooks/useAction';
 import { randomiseUtils } from '@utils/randomise.utils';
+import React, { FC, useEffect } from 'react';
+
+const CardWithErrorBoundary = errorBoundary(Card);
 
 const RandomPlanet: FC = () => {
   const { dataRandom, randomCurrentID, loadingRandom } = useTypedUseSelector(
@@ -36,15 +39,17 @@ const RandomPlanet: FC = () => {
   }, [randomCurrentID, setRandomCurrentID, stardbRequest]);
 
   return (
-    <Card
-      data={{
-        ...data,
-        id: randomCurrentID,
-        type: 'planets',
-      }}
-      isRandom
-      isLoading={loadingRandom}
-    />
+    <>
+      <CardWithErrorBoundary
+        data={{
+          ...data,
+          id: randomCurrentID,
+          type: 'planets',
+        }}
+        isRandom
+        isLoading={loadingRandom}
+      />
+    </>
   );
 };
 
