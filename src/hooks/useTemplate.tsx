@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useTypedUseSelector } from '@src/hooks/useTypedUseSelector';
 import { useAction } from '@src/hooks/useAction';
+import { errorBoundary } from '@src/HOC/errorBoundary';
 import { List } from '@components/List';
 import { Card } from '@components/Card';
 import * as t from './useTemplate.style';
@@ -22,12 +23,14 @@ const fieldsMap: IfieldsMap = {
   planets: ['name', 'pupulation', 'rotation_period'],
 };
 
+const ListWithErrorBoundary = errorBoundary(List);
+const CardErrorBoundary = errorBoundary(Card);
+
 const Template: FC<ITemplate> = ({ path }) => {
   const { data, currentData, currentID, loadingData } = useTypedUseSelector(
     (state) => state.data,
   );
   const { dataRequest } = useAction();
-
   let currentTarget: { [key: string]: string } | null = null;
 
   if (currentData) {
@@ -50,12 +53,12 @@ const Template: FC<ITemplate> = ({ path }) => {
   }, [dataRequest, path]);
 
   return (
-    <div css={t.peopleWrap} data-testid="peoplePage">
+    <div css={t.peopleWrap} data-testid={`${path}Page`}>
       <div css={t.itemWrap}>
-        <List data={data} isLoading={loadingData} />
+        <ListWithErrorBoundary data={data} isLoading={loadingData} />
       </div>
       <div css={t.itemWrap}>
-        <Card data={currentTarget} isLoading={loadingData} />
+        <CardErrorBoundary data={currentTarget} isLoading={loadingData} />
       </div>
     </div>
   );
