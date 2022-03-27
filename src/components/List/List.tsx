@@ -1,25 +1,35 @@
 import React, { FC } from 'react';
+import { IStardbData } from '@src/interfaces';
+import { useAction } from '@src/hooks/useAction';
+import { Loader } from '@components/Loader';
 import * as l from './List.style';
 
-const dataMock: { name: string; title: string }[] = [
-  { name: 'Name1', title: 'Title' },
-  { name: 'Name2', title: 'Title' },
-  { name: 'Name3', title: 'Title' },
-  { name: 'Name4', title: 'Title' },
-  { name: 'Name5', title: 'Title' },
-];
+interface IList {
+  data: IStardbData[] | null;
+  isLoading: boolean;
+}
 
-const List: FC = () => {
+const List: FC<IList> = ({ data, isLoading }) => {
+  const { setCurrentData, setCurrentID } = useAction();
+
+  const clickHandler = (id: number) => {
+    if (data) {
+      setCurrentID({ currentID: String(id + 1) });
+      setCurrentData({ currentData: { ...data[id] } });
+    }
+  };
+
+  const content = data
+    ? data.map(({ name }, ind) => (
+        <li key={name} css={l.item} onClick={() => clickHandler(ind)}>
+          {name}
+        </li>
+      ))
+    : null;
+
   return (
     <ul className="reset-list" data-testid="list" css={l.list}>
-      {dataMock.map(({ name, title }) => (
-        <li key={name} css={l.item}>
-          <a href="#d" css={l.link}>
-            {name}
-            {title}
-          </a>
-        </li>
-      ))}
+      {isLoading ? <Loader isLoading={isLoading} /> : content}
     </ul>
   );
 };

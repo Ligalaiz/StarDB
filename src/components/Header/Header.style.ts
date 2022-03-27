@@ -3,7 +3,7 @@ import { color } from '@src/styles';
 
 export const header = css`
   display: flex;
-  margin-top: 0.5rem;
+  padding-top: 0.5rem;
   margin-bottom: 1rem;
 
   gap: 0.2rem;
@@ -24,6 +24,9 @@ export const navLink = css`
   transition: all 0.2s linear;
 
   &:hover {
+    background-color: ${color['grey-color-light']};
+  }
+  &.active {
     background-color: ${color['grey-color-light']};
   }
 `;
