@@ -11,6 +11,7 @@
     "clean": "rm -rf dist",
     "test": "jest --forceExit",
     "test:smoke": "jest --forceExit --t=#smoke",
+    "test:test": "jest --forceExit --t=#test",
     "test:coverage": "jest --forceExit --coverage",
     "test:mutation": "npx stryker run",
     "loki:approve": "npx loki approve",
