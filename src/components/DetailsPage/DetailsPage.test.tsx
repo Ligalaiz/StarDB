@@ -13,12 +13,12 @@ const renderComponent = () =>
   );
 
 describe('DetailsPage component', () => {
-  describe('Component not exist', () => {
-    test('detailsPage that the component has not been rendered #test', () => {
+  describe('Component exist', () => {
+    test('detailsPage that the component has been rendered #test', () => {
       const { queryByTestId } = renderComponent();
       const detailsPage = queryByTestId('detailsPage');
 
-      expect(detailsPage).not.toBeInTheDocument();
+      expect(detailsPage).toBeInTheDocument();
     });
   });
 });
