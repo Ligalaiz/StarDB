@@ -41,11 +41,12 @@ const Card: FC<ICard> = ({ isRandom, data, isLoading }) => {
 
   if (data) {
     const { type, id, ...currentData } = data;
+
     content = (
       <>
         <div css={c.imageWrap}>
           <img
-            src={getImage(type, id)}
+            src={getImage(type!, id)}
             alt="title"
             data-testid="cardImage"
             css={c.image}
