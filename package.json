@@ -6,11 +6,13 @@
   "scripts": {
     "build": "webpack --config config/webpack.prod.js",
     "start:client": "webpack serve --config config/webpack.dev.js",
+    "check": "npm run lint && npm run test:smoke",
     "lint": "eslint ./src --cache",
     "lint:fix": "eslint ./src  --fix",
     "clean": "rm -rf dist",
     "test": "jest --forceExit",
     "test:smoke": "jest --forceExit --t=#smoke",
+    "test:test": "jest --forceExit --t=#test",
     "test:coverage": "jest --forceExit --coverage",
     "test:mutation": "npx stryker run",
     "loki:approve": "npx loki approve",
@@ -173,12 +175,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:fix && npm test"
+      "pre-commit": "npm run lint:fix && npm test:smoke"
     }
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "npm run lint:fix",
+      "npm run test:smoke"
     ]
   },
   "loki": {
