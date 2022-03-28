@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --config config/webpack.prod.js",
     "start:client": "webpack serve --config config/webpack.dev.js",
+    "check": "npm run lint && npm run test:smoke",
     "lint": "eslint ./src --cache",
     "lint:fix": "eslint ./src  --fix",
     "clean": "rm -rf dist",
@@ -174,12 +175,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint:fix && npm test"
+      "pre-commit": "npm run lint:fix && npm test:smoke"
     }
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "npm run lint:fix",
+      "npm run test:smoke"
     ]
   },
   "loki": {
