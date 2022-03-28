@@ -13,9 +13,17 @@ export const list = css`
   }
 `;
 
+export const listHome = css`
+  ${list}
+  max-width: none;
+`;
+
 export const item = css`
+  display: block;
   padding: 0.75rem 1.25rem;
   border-top: 1px solid ${color['grey-color-light-X1']};
+
+  color: ${color['white-color']};
   &:hover {
     background-color: ${color['grey-color-light-X1']};
   }

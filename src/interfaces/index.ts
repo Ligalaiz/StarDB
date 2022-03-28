@@ -7,6 +7,7 @@ export interface IStardbData {
   rotation_period?: string;
   population?: string;
   diameter?: string;
+  type?: string;
   [key: string]: any;
 }
 
