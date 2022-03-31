@@ -22,6 +22,7 @@ export interface IDataState {
   data: IStardbData[] | null;
   currentData: IStardbData | null;
   loadingData: boolean;
+  sourceData: 'local' | 'server';
   errorData: null | string;
   [key: string]: any;
 }
