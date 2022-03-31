@@ -21,10 +21,8 @@ const randomPlanetSlice = createSlice({
     });
 
     builder.addCase(stardbRequest.fulfilled, (state, action) => {
-      const result = action.payload;
-
       state.loadingRandom = false;
-      state.dataRandom = result;
+      state.dataRandom = action.payload;
     });
 
     builder.addCase(stardbRequest.rejected, (state, action) => {
