@@ -52,8 +52,21 @@ export const btn = css`
   transition: all 0.2s linear;
 
   background-color: ${color['blue-color-light']};
+  box-shadow: 2px 2px 6px 1px ${color['green-color']};
 
   &:hover {
     background-color: ${color['blue-color-light-X1']};
+  }
+  &:active {
+    box-shadow: none;
+  }
+
+  &:disabled {
+    background-color: ${color['grey-color-light']};
+    cursor: default;
+    box-shadow: none;
+    &:hover {
+      background-color: ${color['grey-color-light']};
+    }
   }
 `;
