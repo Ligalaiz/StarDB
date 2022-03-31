@@ -14,6 +14,20 @@ const dataReducers = {
   ) => {
     state.currentData = action.payload.currentData;
   },
+  setDataSource: (
+    state: IDataState,
+    action: PayloadAction<{ sourceData: 'local' | 'server' }>,
+  ) => {
+    state.sourceData = action.payload.sourceData;
+    console.log(state.sourceData);
+  },
+  setSource: (
+    state: IDataState,
+    action: PayloadAction<{ data: IStardbData[] }>,
+  ) => {
+    state.data = action.payload.data;
+    console.log(state.data);
+  },
   setDataError: (
     state: IDataState,
     action: PayloadAction<{ error: string }>,

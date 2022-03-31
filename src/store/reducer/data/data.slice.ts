@@ -8,6 +8,7 @@ const dataState = {
   currentData: null,
   currentID: null,
   loadingData: false,
+  sourceData: 'server',
   errorData: null,
 } as IDataState;
 
@@ -22,10 +23,8 @@ const dataSlice = createSlice({
     });
 
     builder.addCase(dataRequest.fulfilled, (state, action) => {
-      const result = action.payload.results;
-
       state.loadingData = false;
-      state.data = result;
+      state.data = action.payload.results;
     });
 
     builder.addCase(dataRequest.rejected, (state, action) => {
