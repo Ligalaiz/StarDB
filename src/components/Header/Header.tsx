@@ -29,6 +29,7 @@ const Header: FC = () => {
             pathname: '/',
             search: `${search}`,
           }}
+          onClick={handleClick}
         >
           StarDB
         </NavLink>
