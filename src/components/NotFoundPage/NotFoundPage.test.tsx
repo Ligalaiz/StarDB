@@ -6,12 +6,12 @@ import React from 'react';
 const renderComponent = () => render(<NotFoundPage />);
 
 describe('NotFoundPage component', () => {
-  describe('Component not exist', () => {
-    it('notFoundPage check that the component has not been rendered #smoke', () => {
+  describe('Component exist', () => {
+    it('notFoundPage check that the component has been rendered #smoke', () => {
       const { queryByTestId } = renderComponent();
       const notFoundPage = queryByTestId('notFoundPage');
 
-      expect(notFoundPage).not.toBeInTheDocument();
+      expect(notFoundPage).toBeInTheDocument();
     });
   });
 });
