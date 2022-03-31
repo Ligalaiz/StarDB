@@ -6,6 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { List } from '@components/List';
 import { Card } from '@components/Card';
 import * as t from './useTemplate.style';
+import { getLocalDataUtils } from '@src/utils';
 
 interface ITemplate {
   path: string;
@@ -27,17 +28,16 @@ const fieldsMap: IfieldsMap = {
 };
 
 const ListWithErrorBoundary = errorBoundary(List);
-const CardErrorBoundary = errorBoundary(Card);
+const CardWithErrorBoundary = errorBoundary(Card);
 
 const Template: FC<ITemplate> = ({
   path,
   isHome = false,
   isDetails = false,
 }) => {
-  const { data, currentData, currentID, loadingData } = useTypedUseSelector(
-    (state) => state.data,
-  );
-  const { dataRequest, setCurrentData, setCurrentID } = useAction();
+  const { data, currentData, currentID, loadingData, sourceData } =
+    useTypedUseSelector((state) => state.data);
+  const { dataRequest, setCurrentData, setCurrentID, setSource } = useAction();
   const navigate = useNavigate();
   const { id } = useParams();
   let currentTarget: { [key: string]: string } | null = null;
@@ -58,8 +58,12 @@ const Template: FC<ITemplate> = ({
   }
 
   useEffect(() => {
-    dataRequest(`${path}/`);
-  }, [dataRequest, path]);
+    if (sourceData === 'local') {
+      setSource({ data: getLocalDataUtils(`${path}`) });
+    } else {
+      dataRequest(`${path}/`);
+    }
+  }, [dataRequest, path, setSource, sourceData]);
 
   useEffect(() => {
     if (data && id) {
@@ -84,7 +88,7 @@ const Template: FC<ITemplate> = ({
       </div>
 
       <div css={t.itemWrap}>
-        <CardErrorBoundary data={currentTarget} isLoading={loadingData} />
+        <CardWithErrorBoundary data={currentTarget} isLoading={loadingData} />
       </div>
     </>
   );
@@ -92,7 +96,7 @@ const Template: FC<ITemplate> = ({
   const detailsView = (
     <>
       <div css={t.itemWrapDetails}>
-        <CardErrorBoundary data={currentTarget} isLoading={loadingData} />
+        <CardWithErrorBoundary data={currentTarget} isLoading={loadingData} />
       </div>
       <div css={t.itemWrapDetails}>
         <button
@@ -125,8 +129,16 @@ const Template: FC<ITemplate> = ({
     currentView = homeView;
   }
 
+  let testAttribute = path;
+
+  if (isHome) {
+    testAttribute = 'home';
+  } else if (isDetails) {
+    testAttribute = 'details';
+  }
+
   return (
-    <div css={t.peopleWrap} data-testid={`${isHome ? 'home' : path}Page`}>
+    <div css={t.peopleWrap} data-testid={`${testAttribute}Page`}>
       {currentView}
     </div>
   );
