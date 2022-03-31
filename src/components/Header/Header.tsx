@@ -1,14 +1,22 @@
 import React, { FC } from 'react';
+import { useTypedUseSelector } from '@src/hooks/useTypedUseSelector';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAction } from '@src/hooks/useAction';
 import * as h from './Header.style';
 
 const Header: FC = () => {
+  const { isLogin } = useTypedUseSelector((state) => state.auth);
+  const { sourceData } = useTypedUseSelector((state) => state.data);
+  const { setCurrentData, setDataSource } = useAction();
   const { search } = useLocation();
-  const { setCurrentData } = useAction();
 
   const handleClick = () => {
     setCurrentData({ currentData: null });
+  };
+
+  const handleClickData = () => {
+    const source = sourceData === 'local' ? 'server' : 'local';
+    setDataSource({ sourceData: source });
   };
 
   return (
@@ -94,7 +102,12 @@ const Header: FC = () => {
           </li>
         </ul>
       </nav>
-      <button data-testid="changeService" css={h.btn}>
+      <button
+        disabled={!isLogin}
+        onClick={handleClickData}
+        data-testid="changeService"
+        css={h.btn}
+      >
         Change Service
       </button>
     </header>
